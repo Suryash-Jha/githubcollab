@@ -6,9 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h1>My First Heading</h1>
-    <h2>Checking github opages</h2>
-    <h1>Hey</h1>>
+<body onload="func1()">
+    <div class="container" style="height: 500px; width:400px; border: 2px solid red;">
+        <div id="question1"></div>
+        <div id="question2"></div>
+        <div id="question3"></div>
+        <div id="question4"></div>
+        <div id="queryFailed"></div>
+        <!-- <button onclick="func1()">Button</button> -->
+    </div>
+    <script>
+        function getCurrDate(){
+            const date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            let currentDate = `${day}_${month}_${year}`;
+            return currentDate;
+        }
+        function func1() {
+            var todayQuestions= {};
+            console.log("hey");
+            const options = {method: 'GET'};
+
+            fetch('https://script.google.com/macros/s/AKfycbwkHlGDRJbaumjp0FkSZeCOEirpC6Rqgf0-JhF45dLeh6eRSLuCNp0usVQjbN7wkSb9/exec', options)
+            .then(response => response.json())
+            .then(response => {
+                console.log("work");
+                let currDate= getCurrDate();
+                const todayQuestions= response['data'][response['data'].length-1];
+                console.log(typeof(todayQuestions));
+                const lastDateKey= Object.keys(todayQuestions);
+                if(lastDateKey== currDate){
+                    for(let i=0; i<4; i++){
+                        document.querySelector(`#question${i+1}`).innerHTML= `Question ${i+1}: ${Object.values(todayQuestions[currDate])[i]}`;
+                    }
+                }
+                else{
+                    document.querySelector("#queryFailed").innerHTML= "No questions for today";
+                    console.log("not equal");
+                }
+            })
+            .catch(err => console.error(err));  
+    }
+    </script>
 </body>
+
 </html>
