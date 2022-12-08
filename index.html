@@ -5,43 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        #date{
-            font-size: 50px;
-            font-weight:bold;
-            padding: 50px;
-        }
-        #maincontainer{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .container{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .vals{
-            font-size: 20px;
-            border: 2px solid black;
-            padding: 10px;
-            margin: 10px;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body onload="func1()">
     <div id="maincontainer">
     <div id="date"></div>
-    <div class="container" style="height: 500px; width:400px; border: 2px solid red;">
+    <div class="container">
         <div id="question1" class="vals"></div>
         <div id="question2" class="vals"></div>
         <div id="question3" class="vals"></div>
@@ -49,58 +18,8 @@
         <div id="queryFailed"></div>
         <!-- <button onclick="func1()">Button</button> -->
     </div>
-    </div>
-    <script>
-        // const fs = require('fs');
-
-        function getCurrDate(){
-            const date = new Date();
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
-            let currentDate = `${day}_${month}_${year}`;
-            return currentDate;
-        }
-        function func1() {
-            var todayQuestions= {};
-            console.log("hey");
-            const options = {method: 'GET'};
-            var Todate= localStorage.getItem("date");
-            if(Todate== getCurrDate()){
-                document.querySelector("#date").innerHTML= `Date: ${Todate}`;
-                for(let i=0; i<4; i++){
-                        var content= localStorage.getItem(`question${i+1}`);
-                        document.querySelector(`#question${i+1}`).innerHTML= `Question ${i+1}: ${content}`;
-                    }
-            }
-            else{
-                fetch('https://script.google.com/macros/s/AKfycbwkHlGDRJbaumjp0FkSZeCOEirpC6Rqgf0-JhF45dLeh6eRSLuCNp0usVQjbN7wkSb9/exec', options)
-            .then(response => response.json())
-            .then(response => {
-                console.log("work");
-                let currDate= getCurrDate();
-                const todayQuestions= response['data'][response['data'].length-1];
-                // consolelog(todayQuestions);
-                console.log(todayQuestions);
-                const lastDateKey= Object.keys(todayQuestions);
-                if(lastDateKey== currDate){
-                    localStorage.setItem("date", lastDateKey);
-                    localStorage.setItem("question1", lastDateKey);
-
-                    for(let i=0; i<4; i++){
-                        localStorage.setItem(`question${i+1}`, Object.values(todayQuestions[currDate])[i]);
-                        document.querySelector(`#question${i+1}`).innerHTML= `Question ${i+1}: ${Object.values(todayQuestions[currDate])[i]}`;
-                    }
-                }
-                else{
-                    document.querySelector("#queryFailed").innerHTML= "No questions for today";
-                }
-            })
-            .catch(err => console.error(err)); 
-            }
- 
-    }
-    </script>
+</div>
+    <script src="myScript.js"></script>
 </body>
 
 </html>
