@@ -5,15 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #date{
+            font-size: 50px;
+            font-weight:bold;
+            padding: 50px;
+        }
+        #maincontainer{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .vals{
+            font-size: 20px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body onload="func1()">
+    <div id="maincontainer">
+    <div id="date"></div>
     <div class="container" style="height: 500px; width:400px; border: 2px solid red;">
-        <div id="question1"></div>
-        <div id="question2"></div>
-        <div id="question3"></div>
-        <div id="question4"></div>
+        <div id="question1" class="vals"></div>
+        <div id="question2" class="vals"></div>
+        <div id="question3" class="vals"></div>
+        <div id="question4" class="vals"></div>
         <div id="queryFailed"></div>
         <!-- <button onclick="func1()">Button</button> -->
+    </div>
     </div>
     <script>
         // const fs = require('fs');
@@ -32,6 +67,7 @@
             const options = {method: 'GET'};
             var Todate= localStorage.getItem("date");
             if(Todate== getCurrDate()){
+                document.querySelector("#date").innerHTML= `Date: ${Todate}`;
                 for(let i=0; i<4; i++){
                         var content= localStorage.getItem(`question${i+1}`);
                         document.querySelector(`#question${i+1}`).innerHTML= `Question ${i+1}: ${content}`;
