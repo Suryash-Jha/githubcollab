@@ -32,6 +32,7 @@
             .then(response => response.json())
             .then(response => {
                 console.log(response);
+                console.log("getting response")
                 let currDate= getCurrDate();
                 const todayQuestions= response['data'][response['data'].length-1];
                 console.log(todayQuestions);
