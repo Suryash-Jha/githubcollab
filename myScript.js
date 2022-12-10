@@ -1,4 +1,3 @@
-        // const fs = require('fs');
 
         function getCurrDate(){
             const date = new Date();
@@ -26,12 +25,14 @@
                         var content= extractTextFromSlug(link);
                         const a= document.createElement('a');
                         a.href= link;
+                        a.target= "_blank";
                         // a.innerHTML= content;
                         const but= document.createElement('button');
+                        but.className= "but";
                         but.innerHTML= content;
                         but.style.border= "black";
                         but.style.borderRadius= "25px";
-                        but.style.backgroundColor= "black";
+                        but.style.backgroundColor= "#661919";
                         but.style.fontSize= "20px";
                         but.style.color= "white";
                         but.style.height= "100%";
@@ -40,22 +41,15 @@
                         document.querySelector(`#question${i+1}`).appendChild(a);
                     }
             }
-            // if(0){
-            //     document.querySelector("#date").innerHTML= `Date: ${Todate}`;
-            //     for(let i=0; i<4; i++){
-            //             var link= localStorage.getItem(`question${i+1}`);
-            //             // var content= extractTextFromSlug(link);
 
-            //             document.querySelector(`#question${i+1}`).innerHTML= `Question ${i+1}: ${content}`;
-            //         }
-            // }
             else{
-                fetch('https://script.google.com/macros/s/AKfycbyVn4KFyZZsWPjKTvB_ZL3uxPkHseKGcmpH3M4sfTzjgnqxpNRRpVB9wJueLMZx8n1J/exec', options)
+                fetch('https://script.google.com/macros/s/AKfycbxwVi0ds51Zd9H0YrpDFttK1pEJpGMcv1ccO1bde6k2VUs7RL66Zx2cqBir89MLL7-z/exec', options)
             .then(response => response.json())
             .then(response => {
                 localStorage.setItem("date", currDate);
                 document.querySelector("#date").innerHTML= `${currDate}`;
-                const todayQuestions= response[currDate];
+                const todayQuestions= response['question'][currDate];
+                console.log(todayQuestions);
                 if(todayQuestions== undefined){
                     document.querySelector("#queryFailed").innerHTML= "No questions for today";
                 }
@@ -66,52 +60,26 @@
                                 var content= extractTextFromSlug(link);
                                 const a= document.createElement('a');
                                 a.href= link;
-                                a.innerHTML= content;
+                                a.target= "_blank";
+                                // a.innerHTML= content;
+                                const but= document.createElement('button');
+                                but.innerHTML= content;
+                                but.className= "but";
+                                but.style.border= "black";
+                                but.style.borderRadius= "25px";
+                                but.style.backgroundColor= "#661919";
+                                but.style.fontSize= "20px";
+                                but.style.color= "white";
+                                but.style.height= "100%";
+                                but.style.width= "100%";
+                                a.appendChild(but);
                                 document.querySelector(`#question${i+1}`).appendChild(a);
                                 // document.querySelector(`#question${i+1}`).innerHTML= localStorage.getItem(`question${i+1}`);
                 }
             }
-                // if(currDate== localDate){
-                //     localStorage.setItem("date", currDate);
-                //     document.querySelector("#date").innerHTML= `${currDate}`;
-                //     for(let i=0; i<4; i++){
-                //         localStorage.setItem(`question${i+1}`, todayQuestions[`Question ${i+1}`]);
-                //         console
-                //         document.querySelector(`#question${i+1}`).innerHTML= localStorage.getItem(`question${i+1}`);
-                //     }
-                // }
-                // else{
-                //     localStorage.setItem("date", currDate);
-                //     document.querySelector("#queryFailed").innerHTML= "No questions for today";
-                // }
-                // consolelog(todayQuestions);
-                // console.log(todayQuestions);
-                // console.log(todayQuestions['Question 1']);
-                // var i=0;
-                // localStorage.setItem(`question${i+2}`, todayQuestions['Question 1']);
                 
             })
             .catch(err => console.error(err)); 
             }
  
     }
-
-
-
-    //Previous Code
-    /*
-    const lastDateKey= Object.keys(todayQuestions);
-                if(lastDateKey== currDate){
-                    localStorage.setItem("date", lastDateKey);
-                    document.querySelector("#date").innerHTML= `Date: ${Todate}`;
-                    for(let i=0; i<4; i++){
-
-                        localStorage.setItem(`question${i+1}`, todayQuestions[`'Question $i+1'`]);
-
-                        document.querySelector(`#question${i+1}`).innerHTML= `Question ${i+1}: ${Object.values(todayQuestions[currDate])[i]}`;
-                    }
-                }
-                else{
-                    document.querySelector("#queryFailed").innerHTML= "No questions for today";
-                } 
-    */
