@@ -27,9 +27,11 @@
 }
 .vals {
   font-size: 20px;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 20px;
   padding: 10px;
   margin: 10px;
+  height: 22%;
+  width: 90%;
   font-weight: bold;
 }

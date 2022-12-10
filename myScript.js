@@ -24,7 +24,20 @@
                 for(let i=0; i<4; i++){
                         var link= localStorage.getItem(`question${i+1}`);
                         var content= extractTextFromSlug(link);
-                        document.querySelector(`#question${i+1}`).innerHTML= `${content}`;
+                        const a= document.createElement('a');
+                        a.href= link;
+                        // a.innerHTML= content;
+                        const but= document.createElement('button');
+                        but.innerHTML= content;
+                        but.style.border= "black";
+                        but.style.borderRadius= "25px";
+                        but.style.backgroundColor= "black";
+                        but.style.fontSize= "20px";
+                        but.style.color= "white";
+                        but.style.height= "100%";
+                        but.style.width= "100%";
+                        a.appendChild(but);
+                        document.querySelector(`#question${i+1}`).appendChild(a);
                     }
             }
             // if(0){
@@ -51,7 +64,10 @@
                                 localStorage.setItem(`question${i+1}`, todayQuestions[`Question ${i+1}`]);
                                 var link= localStorage.getItem(`question${i+1}`);
                                 var content= extractTextFromSlug(link);
-                                document.querySelector(`#question${i+1}`).innerHTML= `${content}`;
+                                const a= document.createElement('a');
+                                a.href= link;
+                                a.innerHTML= content;
+                                document.querySelector(`#question${i+1}`).appendChild(a);
                                 // document.querySelector(`#question${i+1}`).innerHTML= localStorage.getItem(`question${i+1}`);
                 }
             }
