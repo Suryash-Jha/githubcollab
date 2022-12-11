@@ -12,6 +12,9 @@
             var question= questionSlug.split("/")[4].split("-").join(" ");
             return question;
         }
+        function checkQuestionStatus(){
+            
+        }
         function func1() {
             var todayQuestions= {};
             // console.log("hey");

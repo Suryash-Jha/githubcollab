@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Performance</title>
+</head>
+<body>
+    <script>
+    async function loadJson(){
+        const res = await fetch('user.json');
+        const json = await res.json();
+        // console.log(json);
+        for(var i = 0; i < json['Users'].length; i++){
+            var name= json['Users'][i].name;
+            var id= json['Users'][i].id;
+            const opt= document.createElement('option');
+            opt.value= id;
+            opt.innerHTML= name;
+            document.getElementById('people').appendChild(opt);
+
+        }
+    }
+    loadJson();
+    </script>
+    <div class="container">
+        <label for="people">Choose person:</label>
+            <select name="people" id="people">
+            </select>
+            <button type="submit" onclick="fetchData()"></button>
+    </div>
+    <div id="data"></div>
+    <script>
+        function fetchData(){
+            var id = document.getElementById('people').value;
+        }
+    </script>
+</body>
+</html>
