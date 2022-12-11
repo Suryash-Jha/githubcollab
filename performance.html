@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Performance</title>
 </head>
+<style>
+    button{
+        height: 30px;
+        width: 100px;
+        border-radius: 5px;
+        background-color: #4CAF50;   
+    }
+</style>
 <body>
     <script>
     async function loadJson(){
@@ -28,34 +36,34 @@
         <label for="people">Choose person:</label>
             <select name="people" id="people">
             </select>
-            <button type="submit" onclick="fetchData()"></button>
+            <button type="submit" onclick="fetchData()">Submit</button>
     </div>
     <div id="data"></div>
     <script>
         function fetchLeetCode(id){
             var response= fetch(`https://aquamediumorchidvoxels.suryashjha.repl.co/ret?id=${id}`, {
-    headers: {
-        'authority': 'aquamediumorchidvoxels.suryashjha.repl.co',
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'accept-language': 'en-US,en;q=0.9',
-        'cache-control': 'max-age=0',
-        'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
-        'sec-ch-ua-mobile': '?1',
-        'sec-ch-ua-platform': '"Android"',
-        'sec-fetch-dest': 'document',
-        'sec-fetch-mode': 'navigate',
-        'sec-fetch-site': 'none',
-        'sec-fetch-user': '?1',
-        'upgrade-insecure-requests': '1',
-        'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36'
-    }
-});
+                headers: {
+                    'authority': 'aquamediumorchidvoxels.suryashjha.repl.co',
+                    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'accept-language': 'en-US,en;q=0.9',
+                    'cache-control': 'max-age=0',
+                    'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
+                    'sec-ch-ua-mobile': '?1',
+                    'sec-ch-ua-platform': '"Android"',
+                    'sec-fetch-dest': 'document',
+                    'sec-fetch-mode': 'navigate',
+                    'sec-fetch-site': 'none',
+                    'sec-fetch-user': '?1',
+                    'upgrade-insecure-requests': '1',
+                    'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36'
+                },
+            });
             console.log(response);
             // console.log(response);
         }
         function fetchData(){
             var id = document.getElementById('people').value;
-            fetchLeetCode(id);
+            var allRecentQues= fetchLeetCode(id);
         }
     </script>
 </body>
