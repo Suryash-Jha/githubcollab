@@ -6,7 +6,7 @@
 #date {
   font-size: 50px;
   font-weight: bold;
-  padding: 50px;
+  padding: 15px;
 }
 #maincontainer {
   height: 100%;
@@ -25,6 +25,17 @@
   border: 2px solid red;
   border-radius: 20px;
 }
+.nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* height: 10%; */
+  /* border: 2px solid black; */
+  /* background-color: #661919; */
+  /* border-radius: 20px; */
+}
 
 /* .btn{
   border: 2px solid black;
@@ -37,8 +48,9 @@
 
 } */
 button:hover{
-  background-color: #4CAF50;
+  background-color: rgb(98, 4, 98);
   color: white;
+  box-shadow: 10px 5px 5px orange;
 }
 
 .vals {
@@ -50,4 +62,18 @@ button:hover{
   height: 22%;
   width: 90%;
   font-weight: bold;
+}
+#performa{
+height:100px;
+width: 142px;
+padding: 20px;
+}
+#performa button{
+  height:50px;
+  width: 100px;
+  padding: 8px;
+  font-size: 14px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  /* font-weight: bold; */
+
 }
