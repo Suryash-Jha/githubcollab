@@ -13,6 +13,17 @@
         border-radius: 5px;
         background-color: #4CAF50;   
     }
+    .question{
+        height: 30px;
+        width: 31%;
+        border-radius: 5px;
+        }
+    .green{
+        background-color: green;
+    }
+    .red{
+        background-color: red;
+    }
 </style>
 <body>
     <script>
@@ -43,8 +54,8 @@
     </div>
     <div id="data" style="height:100%">
         <div id="date"></div>
-        <div class="question" id="question1">HI</div>
-        <div class="question" id="question2">Bye</div>
+        <div class="question green" id="question1">Hey</div>
+        <div class="question" id="question2"></div>
         <div class="question" id="question3"></div>
         <div class="question" id="question4"></div>
     </div>
@@ -58,6 +69,10 @@
             var year = date.getFullYear();
             let currentDate = `${day}_${month}_${year}`;
             return currentDate;
+        }
+        function sulgFinder(link){
+            var question= link.split("/")[4];
+            return question;
         }
         function fetchLeetCode(id){
             var response= fetch(`https://aquamediumorchidvoxels.suryashjha.repl.co/ret?id=${id}`, {
@@ -77,39 +92,80 @@
                     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36'
                 },
             });
-            console.log(response);
+            return response;
+            // console.log(response);
             // console.log(response);
         }
         function fetchData(){
             var id = document.getElementById('people').value;
-            var todayQuestions= fetchLeetCode(id);
-            var currDate= getCurrDate();
-            console.log(currDate);
-            console.log(localStorage.getItem('date'));
-            if(currDate== localStorage.getItem('date')){
-                document.getElementById('date').innerHTML= `Date: ${currDate}`;
-                document.getElementById('question1').innerHTML= `Question 1: ${localStorage.getItem('question1')}`;
-                document.getElementById('question2').innerHTML= `Question 2: ${localStorage.getItem('question2')}`;
-                document.getElementById('question3').innerHTML= `Question 3: ${localStorage.getItem('question3')}`;
-                document.getElementById('question4').innerHTML= `Question 4: ${localStorage.getItem('question4')}`;
+            // var todayQuestions= fetchLeetCode(id).th;
+            document.getElementById('date').innerHTML= getCurrDate();
+            fetchLeetCode(id).then(response => response.json())
+            .then(response => {
+                // var listToday=[];
+                // listToday.append()
+                var recentSubmission= response['subject']['data']['recentAcSubmissionList'];
+                console.log(recentSubmission);
+                for(var i = 1; i<=4; i++){
+                    var link= localStorage.getItem(`question${i}`);
+                    var slug= sulgFinder(link);
+                    var found=0;
+                    for(var j= 0; j<recentSubmission.length; j++){
+                        if(recentSubmission[j]['titleSlug']== slug){
+                            found=1;
+                            break;
+                        }
+                    }
+                    if(found==0){
+                        document.getElementById(`question${i}`).classList.add('red');
+                        document.getElementById(`question${i}`).classList.remove('green');
+                        document.getElementById(`question${i}`).innerHTML= `Question ${slug} not solved`;
+                    }
+                    else{
+                        document.getElementById(`question${i}`).classList.add('green');
+                        document.getElementById(`question${i}`).classList.remove('red');
+                        document.getElementById(`question${i}`).innerHTML= `Question ${slug} is solved`;
+                    }
+                    
+                }
+                // console.log(response);
+                // console.log(localStorage.getItem('question4'));
+
+            })
+            .catch(err => console.error(err)); 
+            // console.log(todayQuestions['subject']['data']);
+            // var currDate= getCurrDate();
+            // console.log(currDate);
+            // console.log(localStorage.getItem('date'));
+            // if(currDate== localStorage.getItem('date')){
+            //     document.getElementById('date').innerHTML= `Date: ${currDate}`;
+            //     for(var i=0; i<4; i++){
+            //         var question= localStorage.getItem(`question${i+1}`);
+            //         // console.log(question);
+            //         document.getElementById(`question${i+1}`).innerHTML= `Question ${i+1}: ${question}`;
+            //     }
+            //     document.getElementById('question1').innerHTML= `Question 1: ${localStorage.getItem('question1')}`;
+            //     document.getElementById('question2').innerHTML= `Question 2: ${localStorage.getItem('question2')}`;
+            //     document.getElementById('question3').innerHTML= `Question 3: ${localStorage.getItem('question3')}`;
+            //     document.getElementById('question4').innerHTML= `Question 4: ${localStorage.getItem('question4')}`;
                 
-            }
-            else{
-                localStorage.setItem('date', currDate);
-                document.getElementById('date').innerHTML= `Date: ${currDate}`;
-                const options = {method: 'GET'};
-                var todayQuestions= fetch('https://script.google.com/macros/s/AKfycbxwVi0ds51Zd9H0YrpDFttK1pEJpGMcv1ccO1bde6k2VUs7RL66Zx2cqBir89MLL7-z/exec', options).then(response => response.json());
-                // var todayQuestions= response.json();
-                console.log(todayQuestions);
-                localStorage.setItem('question1', todayQuestions[0]);
-                localStorage.setItem('question2', todayQuestions[1]);
-                localStorage.setItem('question4', todayQuestions[3]);
-                localStorage.setItem('question3', todayQuestions[2]);
-                document.getElementById('question1').innerHTML= `Question 1: ${localStorage.getItem('question1')}`;
-                document.getElementById('question2').innerHTML= `Question 2: ${localStorage.getItem('question2')}`;
-                document.getElementById('question3').innerHTML= `Question 3: ${localStorage.getItem('question3')}`;
-                document.getElementById('question4').innerHTML= `Question 4: ${localStorage.getItem('question4')}`;
-            }
+            // }
+            // else{
+            //     localStorage.setItem('date', currDate);
+            //     document.getElementById('date').innerHTML= `Date: ${currDate}`;
+            //     const options = {method: 'GET'};
+            //     var todayQuestions= fetch('https://script.google.com/macros/s/AKfycbxwVi0ds51Zd9H0YrpDFttK1pEJpGMcv1ccO1bde6k2VUs7RL66Zx2cqBir89MLL7-z/exec', options).then(response => response.json());
+            //     // var todayQuestions= response.json();
+            //     console.log(todayQuestions);
+            //     localStorage.setItem('question1', todayQuestions[0]);
+            //     localStorage.setItem('question2', todayQuestions[1]);
+            //     localStorage.setItem('question4', todayQuestions[3]);
+            //     localStorage.setItem('question3', todayQuestions[2]);
+            //     document.getElementById('question1').innerHTML= `Question 1: ${localStorage.getItem('question1')}`;
+            //     document.getElementById('question2').innerHTML= `Question 2: ${localStorage.getItem('question2')}`;
+            //     document.getElementById('question3').innerHTML= `Question 3: ${localStorage.getItem('question3')}`;
+            //     document.getElementById('question4').innerHTML= `Question 4: ${localStorage.getItem('question4')}`;
+            // }
 
         }
     </script>
