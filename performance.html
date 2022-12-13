@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,62 +8,142 @@
     <title>User Performance</title>
 </head>
 <style>
-    button{
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .maincontainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        /* border: 2px solid black; */
+        width: 100%;
+        align-content: center;
+    }
+
+    button {
         height: 30px;
         width: 100px;
         border-radius: 5px;
-        background-color: #4CAF50;   
+        background-color: #4CAF50;
     }
-    .question{
+    button:hover{
+        background-color: rgb(4, 180, 33);
+        box-shadow: 3px 5px 1px 2px #decc0c;
+    }
+
+    .question {
         height: 30px;
         width: 31%;
         border-radius: 5px;
-        }
-    .green{
-        background-color: green;
     }
-    .red{
-        background-color: red;
+
+    .green {
+        background-color: rgb(8, 182, 8);
+    }
+
+    .red {
+        background-color: #e10000;
+    }
+
+    #data {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid black;
+        border-radius: 20px;
+        width: 30%;
+        align-content: center;
+        box-shadow: 6px 6px 6px black;
+    }
+
+    #date {
+        height: 10%;
+        width: 50%;
+        border: 2px solid black;
+        border-radius: 10px;
+        box-shadow: 1px 4px 0px black;
+
+        /* border: 2px solid black; */
+        margin: 10px;
+        padding: 10px;
+        font-size: 200%;
+        text-align: center;
+    }
+    #wait{
+        font-size: 150%;
+        font-weight: bolder;
+        text-align: center;
+
+    }
+    .question {
+        height: 15%;
+        width: 90%;
+        border: 2px solid black;
+        border-radius: 10px;
+        /* margin: 10px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        font-size: large;
+        font-weight: bolder;
+        /* text-align: center;
+        justify-self: center; */
+        margin: 20px;
+        /* box-shadow: 6px 6px 6px black; */
+        box-shadow: 1px 4px 0px black;
+
+
     }
 </style>
+
 <body>
     <script>
-    async function loadJson(){
-        const res = await fetch('user.json');
-        const json = await res.json();
-        // console.log(json);
-        for(var i = 0; i < json['Users'].length; i++){
-            var name= json['Users'][i].name;
-            var id= json['Users'][i].id;
-            const opt= document.createElement('option');
-            opt.value= id;
-            opt.innerHTML= name;
-            document.getElementById('people').appendChild(opt);
+        async function loadJson() {
+            const res = await fetch('user.json');
+            const json = await res.json();
+            // console.log(json);
+            for (var i = 0; i < json['Users'].length; i++) {
+                var name = json['Users'][i].name;
+                var id = json['Users'][i].id;
+                const opt = document.createElement('option');
+                opt.value = id;
+                opt.innerHTML = name;
+                document.getElementById('people').appendChild(opt);
 
+            }
         }
-    }
-    loadJson();
+        loadJson();
     </script>
 
-<a href="/index.html">HOME</a>
-
-    <div class="container">
-        <label for="people">Choose person:</label>
-            <select name="people" id="people">
-            </select>
-            <button type="submit" onclick="fetchData()">Submit</button>
+    <a href="/index.html">HOME</a>
+    <div class="container" style="height:10%; width:100%">
+        <label for="people" style="height:100%; font-size: larger;">Choose person:</label>
+        <select name="people" id="people" style="height:100%; font-size: medium;">
+        </select>
+        <button type="submit" onclick="fetchData()">Submit</button>
+        <p id="wait"></p>
     </div>
-    <div id="data" style="height:100%">
-        <div id="date"></div>
-        <div class="question green" id="question1">Hey</div>
-        <div class="question" id="question2"></div>
-        <div class="question" id="question3"></div>
-        <div class="question" id="question4"></div>
+    <div class="maincontainer" style="height:90vh; width:100vw;">
+        <div id="data" style="height:90%;">
+            <div id="date">DATE</div>
+            <div class="question" id="question1"><b>QUESTION 1 STATUS?</b></div>
+            <div class="question" id="question2"><b>QUESTION 2 STATUS?</b></div>
+            <div class="question" id="question3"><b>QUESTION 3 STATUS?</b></div>
+            <div class="question" id="question4"><b>QUESTION 4 STATUS?</b></div>
+        </div>
     </div>
 
 
     <script>
-        function getCurrDate(){
+        function getCurrDate() {
             const date = new Date();
             var day = date.getDate();
             var month = date.getMonth() + 1;
@@ -70,12 +151,12 @@
             let currentDate = `${day}_${month}_${year}`;
             return currentDate;
         }
-        function sulgFinder(link){
-            var question= link.split("/")[4];
+        function sulgFinder(link) {
+            var question = link.split("/")[4];
             return question;
         }
-        function fetchLeetCode(id){
-            var response= fetch(`https://aquamediumorchidvoxels.suryashjha.repl.co/ret?id=${id}`, {
+        function fetchLeetCode(id) {
+            var response = fetch(`https://aquamediumorchidvoxels.suryashjha.repl.co/ret?id=${id}`, {
                 headers: {
                     'authority': 'aquamediumorchidvoxels.suryashjha.repl.co',
                     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -93,46 +174,46 @@
                 },
             });
             return response;
-            // console.log(response);
-            // console.log(response);
         }
-        function fetchData(){
+        function fetchData() {
+            document.getElementById('wait').innerHTML = "Please wait...";
             var id = document.getElementById('people').value;
             // var todayQuestions= fetchLeetCode(id).th;
-            document.getElementById('date').innerHTML= getCurrDate();
+            document.getElementById('date').innerHTML = getCurrDate();
             fetchLeetCode(id).then(response => response.json())
-            .then(response => {
-                // var listToday=[];
-                // listToday.append()
-                var recentSubmission= response['subject']['data']['recentAcSubmissionList'];
-                console.log(recentSubmission);
-                for(var i = 1; i<=4; i++){
-                    var link= localStorage.getItem(`question${i}`);
-                    var slug= sulgFinder(link);
-                    var found=0;
-                    for(var j= 0; j<recentSubmission.length; j++){
-                        if(recentSubmission[j]['titleSlug']== slug){
-                            found=1;
-                            break;
+                .then(response => {
+                    // var listToday=[];
+                    // listToday.append()
+                    var recentSubmission = response['subject']['data']['recentAcSubmissionList'];
+                    console.log(recentSubmission);
+                    for (var i = 1; i <= 4; i++) {
+                        var link = localStorage.getItem(`question${i}`);
+                        var slug = sulgFinder(link);
+                        var found = 0;
+                        for (var j = 0; j < recentSubmission.length; j++) {
+                            if (recentSubmission[j]['titleSlug'] == slug) {
+                                found = 1;
+                                break;
+                            }
                         }
-                    }
-                    if(found==0){
-                        document.getElementById(`question${i}`).classList.add('red');
-                        document.getElementById(`question${i}`).classList.remove('green');
-                        document.getElementById(`question${i}`).innerHTML= `Question ${slug} not solved`;
-                    }
-                    else{
-                        document.getElementById(`question${i}`).classList.add('green');
-                        document.getElementById(`question${i}`).classList.remove('red');
-                        document.getElementById(`question${i}`).innerHTML= `Question ${slug} is solved`;
-                    }
-                    
-                }
-                // console.log(response);
-                // console.log(localStorage.getItem('question4'));
+                        if (found == 0) {
+                            document.getElementById(`question${i}`).classList.add('red');
+                            document.getElementById(`question${i}`).classList.remove('green');
+                            document.getElementById(`question${i}`).innerHTML = `Question ${slug} not solved`;
+                        }
+                        else {
+                            document.getElementById(`question${i}`).classList.add('green');
+                            document.getElementById(`question${i}`).classList.remove('red');
+                            document.getElementById(`question${i}`).innerHTML = `Question ${slug} is solved`;
+                        }
 
-            })
-            .catch(err => console.error(err)); 
+                    }
+                    document.getElementById('wait').innerHTML = "";
+                    // console.log(response);
+                    // console.log(localStorage.getItem('question4'));
+
+                })
+                .catch(err => console.error(err));
             // console.log(todayQuestions['subject']['data']);
             // var currDate= getCurrDate();
             // console.log(currDate);
@@ -148,7 +229,7 @@
             //     document.getElementById('question2').innerHTML= `Question 2: ${localStorage.getItem('question2')}`;
             //     document.getElementById('question3').innerHTML= `Question 3: ${localStorage.getItem('question3')}`;
             //     document.getElementById('question4').innerHTML= `Question 4: ${localStorage.getItem('question4')}`;
-                
+
             // }
             // else{
             //     localStorage.setItem('date', currDate);
@@ -170,4 +251,5 @@
         }
     </script>
 </body>
+
 </html>
