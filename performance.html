@@ -190,7 +190,9 @@
             document.getElementById('wait').innerHTML = "Please wait...";
             var id = document.getElementById('people').value;
             // var todayQuestions= fetchLeetCode(id).th;
-            document.getElementById('date').innerHTML = getCurrDate();
+            var myDate = getCurrDate();
+            var dateval =  `${myDate[0]}${myDate[1]}`+"/"+`${myDate[3]}${myDate[4]}`+"/"+`${myDate[6]}${myDate[7]}${myDate[8]}${myDate[9]}`;
+            document.getElementById('date').innerHTML = `${dateval}`;
             fetchLeetCode(id).then(response => response.json())
                 .then(response => {
                     // var listToday=[];
