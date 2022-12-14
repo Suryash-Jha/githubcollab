@@ -71,7 +71,7 @@
 button:hover{
   background-color: rgb(98, 4, 98);
   color: white;
-  box-shadow: 10px 5px 5px orange;
+  box-shadow: 10px 5px 5px black;
 }
 
 .vals {
@@ -95,6 +95,12 @@ padding: 20px;
   padding: 8px;
   font-size: 14px;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  border-radius: 30px;
   /* font-weight: bold; */
 
+}
+#performa button:hover{
+  background-color: rgb(98, 4, 98);
+  color: white;
+  box-shadow: 10px 5px 5px orange;
 }
