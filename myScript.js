@@ -43,9 +43,9 @@
         }
         function func1() {
             var diffiXcolor={
-                "EASY": "rgb(31 107 3)",
-                "MEDIUM": "rgb(207 103 4)",
-                "HARD": "rgb(205 6 6)"
+                EASY: "rgb(31 107 3)",
+                MEDIUM: "rgb(207 103 4)",
+                HARD: "rgb(205 6 6)"
 
             }
             var todayQuestions= {};

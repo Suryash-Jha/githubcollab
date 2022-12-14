@@ -13,7 +13,9 @@
         padding: 0;
         box-sizing: border-box;
     }
-
+    .container{
+        padding-bottom: 5rem;
+    }
     .maincontainer {
         display: flex;
         flex-direction: row;
@@ -44,48 +46,30 @@
 
     .green {
         background-color: rgb(8, 182, 8);
+        box-shadow: 16px 11px 7px green;
     }
 
     .red {
         background-color: #e10000;
+        box-shadow: 16px 11px 7px #d72c2c;
     }
 
-    #data {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        border: 2px solid black;
-        border-radius: 20px;
-        width: 30%;
-        align-content: center;
-        box-shadow: 6px 6px 6px black;
-    }
+
+#data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: solid red 2px;
+    max-width: 70%;
+    margin: auto;
+    
+}
 
     #date {
         height: 10%;
-        width: 50%;
-        border: 2px solid black;
-        border-radius: 10px;
-        box-shadow: 1px 4px 0px black;
-
-        /* border: 2px solid black; */
-        margin: 10px;
-        padding: 10px;
-        font-size: 200%;
-        text-align: center;
-    }
-    #wait{
-        font-size: 150%;
-        font-weight: bolder;
-        text-align: center;
-
-    }
-    .question {
-        height: 15%;
-        width: 90%;
-        border: 2px solid black;
+        width: 25%;
+        border: 2px solid rgb(149, 119, 119);
         border-radius: 10px;
         /* margin: 10px; */
         display: flex;
@@ -99,9 +83,33 @@
         margin: 14px;
         /* box-shadow: 6px 6px 6px black; */
         box-shadow: 1px 4px 0px black;
+    }
+    #wait{
+        font-size: 150%;
+        font-weight: bolder;
+        text-align: center;
+
+    }
+    .question {
+        height: 15%;
+        width: 60%;
+        border: 2px solid black;
+        border-radius: 10px;
+        /* margin: 10px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        font-size: large;
+        font-weight: bolder;
+        /* text-align: center;
+        justify-self: center; */
+        margin: 20px;
+        /* box-shadow: 6px 6px 6px black; */
 
 
     }
+    
 </style>
 
 <body>
@@ -131,14 +139,15 @@
         <button type="submit" onclick="fetchData()">Submit</button>
         <p id="wait"></p>
     </div>
-    <div class="maincontainer" style="height:90vh; width:100vw;">
-        <div id="data" style="height:90%;">
+    
+        <div id="data" >
             <div id="date">DATE</div>
             <div class="question" id="question1"><b>QUESTION 1 STATUS?</b></div>
             <div class="question" id="question2"><b>QUESTION 2 STATUS?</b></div>
             <div class="question" id="question3"><b>QUESTION 3 STATUS?</b></div>
             <div class="question" id="question4"><b>QUESTION 4 STATUS?</b></div>
         </div>
+
     </div>
 
 
