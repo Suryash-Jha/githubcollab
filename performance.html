@@ -16,6 +16,29 @@
     .container{
         padding-bottom: 5rem;
     }
+    .loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+
+  width: 90px;
+  height: 90px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
     .maincontainer {
         display: flex;
         flex-direction: row;
@@ -60,14 +83,14 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    max-width: 70%;
+    max-width: 100%;
     margin: auto;
     
 }
 
     #date {
         height: 10%;
-        width: 25%;
+        width: 30%;
         border: 4px solid rgb(149, 119, 119);
         color: white;
         border-radius: 10px;
@@ -89,6 +112,7 @@
         font-size: 150%;
         font-weight: bolder;
         text-align: center;
+        margin: auto;
 
     }
     .question {
@@ -101,6 +125,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: row;
         padding: 10px;
         font-size: large;
         font-weight: bolder;
@@ -139,7 +164,7 @@
         <select name="people" id="people" style="height:100%; font-size: medium;">
         </select>
         <button type="submit" onclick="fetchData()">Submit</button>
-        <p id="wait"></p>
+        <p id="wait" ></p>
     </div>
     
         <div id="data" >
@@ -188,6 +213,7 @@
         }
         function fetchData() {
             document.getElementById('wait').innerHTML = "Please wait...";
+            document.getElementById('wait').classList.add('loader');
             var id = document.getElementById('people').value;
             // var todayQuestions= fetchLeetCode(id).th;
             var myDate = getCurrDate();
@@ -212,16 +238,17 @@
                         if (found == 0) {
                             document.getElementById(`question${i}`).classList.add('red');
                             document.getElementById(`question${i}`).classList.remove('green');
-                            document.getElementById(`question${i}`).innerHTML = `Question ${slug} not solved`;
+                            document.getElementById(`question${i}`).innerHTML = `Question : ${slug} Not Solved`;
                         }
                         else {
                             document.getElementById(`question${i}`).classList.add('green');
                             document.getElementById(`question${i}`).classList.remove('red');
-                            document.getElementById(`question${i}`).innerHTML = `Question ${slug} is solved`;
+                            document.getElementById(`question${i}`).innerHTML = `Question : ${slug}  Solved`;
                         }
 
                     }
                     document.getElementById('wait').innerHTML = "";
+                    document.getElementById('wait').classList.remove('loader')
                     // console.log(response);
                     // console.log(localStorage.getItem('question4'));
 
