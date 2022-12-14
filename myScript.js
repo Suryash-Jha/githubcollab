@@ -16,6 +16,8 @@
             
         // }
         function reloadIt(){
+            document.getElementById("reloadimg").src= "reloadDisabled.png";
+            document.getElementById("reload").disabled= true;
             const options = {method: 'GET'};
             var currDate= getCurrDate();
             fetch('https://script.google.com/macros/s/AKfycbxwVi0ds51Zd9H0YrpDFttK1pEJpGMcv1ccO1bde6k2VUs7RL66Zx2cqBir89MLL7-z/exec', options)
@@ -31,10 +33,11 @@
                     for(let i=0; i<4; i++){
                                 localStorage.setItem(`question${i+1}`, todayQuestions[`Question ${i+1}`]);
                                 localStorage.setItem(`diffi${i+1}`, todayQuestions[`Difficulty ${i+1}`]);
-                                window.location.reload();
-                }
+                            }
+                            window.location.reload();
             }    
-
+            document.getElementById("reloadimg").src= "reload.png";
+            document.getElementById("reload").disabled= false;
             })
             .catch(err => console.error(err)); 
         }
