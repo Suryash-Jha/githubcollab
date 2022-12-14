@@ -99,6 +99,7 @@
                                 localStorage.setItem(`diffi${i+1}`, todayQuestions[`Difficulty ${i+1}`]);
 
                                 var link= localStorage.getItem(`question${i+1}`);
+                                var Difficulty= localStorage.getItem(`diffi${i+1}`);
                                 var content= extractTextFromSlug(link);
                                 const a= document.createElement('a');
                                 a.href= link;
