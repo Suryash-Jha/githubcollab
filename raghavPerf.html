@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Performance</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .container{
+        padding-bottom: 5rem;
+    }
+    .maincontainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        /* border: 2px solid black; */
+        width: 100%;
+        align-content: center;
+    }
+
+    button {
+        height: 30px;
+        width: 100px;
+        border-radius: 5px;
+        background-color: #4CAF50;
+    }
+    button:hover{
+        background-color: rgb(4, 180, 33);
+        box-shadow: 3px 5px 1px 2px #decc0c;
+    }
+
+    .question {
+        height: 30px;
+        width: 31%;
+        border-radius: 5px;
+    }
+
+    .green {
+        background-color: rgb(8, 182, 8);
+    }
+
+    .red {
+        background-color: #e10000;
+    }
+
+
+#data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: solid red 2px; */
+    max-width: 70%;
+    margin: auto;
+    
+}
+
+    #date {
+        height: 10%;
+        width: 25%;
+        border: 2px solid rgb(149, 119, 119);
+        border-radius: 10px;
+        /* margin: 10px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        font-size: large;
+        font-weight: bolder;
+        /* text-align: center;
+        justify-self: center; */
+        margin: 20px;
+        /* box-shadow: 6px 6px 6px black; */
+        box-shadow: 1px 4px 0px black;
+    }
+    #wait{
+        font-size: 150%;
+        font-weight: bolder;
+        text-align: center;
+
+    }
+    .question {
+        height: 15%;
+        width: 60%;
+        border: 2px solid black;
+        border-radius: 10px;
+        /* margin: 10px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        font-size: large;
+        font-weight: bolder;
+        /* text-align: center;
+        justify-self: center; */
+        margin: 20px;
+        /* box-shadow: 6px 6px 6px black; */
+        box-shadow: 1px 4px 0px black;
+
+
+    }
+    
+</style>
+
+<body>
+    <script>
+        async function loadJson() {
+            const res = await fetch('user.json');
+            const json = await res.json();
+            // console.log(json);
+            for (var i = 0; i < json['Users'].length; i++) {
+                var name = json['Users'][i].name;
+                var id = json['Users'][i].id;
+                const opt = document.createElement('option');
+                opt.value = id;
+                opt.innerHTML = name;
+                document.getElementById('people').appendChild(opt);
+
+            }
+        }
+        loadJson();
+    </script>
+
+    <a href="/index.html">HOME</a>
+    <div class="container" style="height:10%; width:100%">
+        <label for="people" style="height:100%; font-size: larger;">Choose person:</label>
+        <select name="people" id="people" style="height:100%; font-size: medium;">
+        </select>
+        <button type="submit" onclick="fetchData()">Submit</button>
+        <p id="wait"></p>
+    </div>
+    
+        <div id="data" >
+            <div id="date">DATE</div>
+            <div class="question" id="question1"><b>QUESTION 1 STATUS?</b></div>
+            <div class="question" id="question2"><b>QUESTION 2 STATUS?</b></div>
+            <div class="question" id="question3"><b>QUESTION 3 STATUS?</b></div>
+            <div class="question" id="question4"><b>QUESTION 4 STATUS?</b></div>
+        </div>
+
+    </div>
+
+
+    <script>
+        function getCurrDate() {
+            const date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            let currentDate = `${day}${month}${year}`;
+            return currentDate;
+        }
+        function sulgFinder(link) {
+            var question = link.split("/")[4];
+            return question;
+        }
+        function fetchLeetCode(id) {
+            var response = fetch(`https://aquamediumorchidvoxels.suryashjha.repl.co/ret?id=${id}`, {
+                headers: {
+                    'authority': 'aquamediumorchidvoxels.suryashjha.repl.co',
+                    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'accept-language': 'en-US,en;q=0.9',
+                    'cache-control': 'max-age=0',
+                    'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
+                    'sec-ch-ua-mobile': '?1',
+                    'sec-ch-ua-platform': '"Android"',
+                    'sec-fetch-dest': 'document',
+                    'sec-fetch-mode': 'navigate',
+                    'sec-fetch-site': 'none',
+                    'sec-fetch-user': '?1',
+                    'upgrade-insecure-requests': '1',
+                    'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36'
+                },
+            });
+            return response;
+        }
+        function fetchData() {
+            document.getElementById('wait').innerHTML = "Please wait...";
+            var id = document.getElementById('people').value;
+            // var todayQuestions= fetchLeetCode(id).th;
+            document.getElementById('date').innerHTML = getCurrDate();
+            fetchLeetCode(id).then(response => response.json())
+                .then(response => {
+                    // var listToday=[];
+                    // listToday.append()
+                    var recentSubmission = response['subject']['data']['recentAcSubmissionList'];
+                    console.log(recentSubmission);
+                    for (var i = 1; i <= 4; i++) {
+                        var link = localStorage.getItem(`question${i}`);
+                        var slug = sulgFinder(link);
+                        var found = 0;
+                        for (var j = 0; j < recentSubmission.length; j++) {
+                            if (recentSubmission[j]['titleSlug'] == slug) {
+                                found = 1;
+                                break;
+                            }
+                        }
+                        if (found == 0) {
+                            document.getElementById(`question${i}`).classList.add('red');
+                            document.getElementById(`question${i}`).classList.remove('green');
+                            document.getElementById(`question${i}`).innerHTML = `Question ${slug} not solved`;
+                        }
+                        else {
+                            document.getElementById(`question${i}`).classList.add('green');
+                            document.getElementById(`question${i}`).classList.remove('red');
+                            document.getElementById(`question${i}`).innerHTML = `Question ${slug} is solved`;
+                        }
+
+                    }
+                    document.getElementById('wait').innerHTML = "";
+                    // console.log(response);
+                    // console.log(localStorage.getItem('question4'));
+
+                })
+                .catch(err => console.error(err));
+            // console.log(todayQuestions['subject']['data']);
+            // var currDate= getCurrDate();
+            // console.log(currDate);
+            // console.log(localStorage.getItem('date'));
+            // if(currDate== localStorage.getItem('date')){
+            //     document.getElementById('date').innerHTML= `Date: ${currDate}`;
+            //     for(var i=0; i<4; i++){
+            //         var question= localStorage.getItem(`question${i+1}`);
+            //         // console.log(question);
+            //         document.getElementById(`question${i+1}`).innerHTML= `Question ${i+1}: ${question}`;
+            //     }
+            //     document.getElementById('question1').innerHTML= `Question 1: ${localStorage.getItem('question1')}`;
+            //     document.getElementById('question2').innerHTML= `Question 2: ${localStorage.getItem('question2')}`;
+            //     document.getElementById('question3').innerHTML= `Question 3: ${localStorage.getItem('question3')}`;
+            //     document.getElementById('question4').innerHTML= `Question 4: ${localStorage.getItem('question4')}`;
+
+            // }
+            // else{
+            //     localStorage.setItem('date', currDate);
+            //     document.getElementById('date').innerHTML= `Date: ${currDate}`;
+            //     const options = {method: 'GET'};
+            //     var todayQuestions= fetch('https://script.google.com/macros/s/AKfycbxwVi0ds51Zd9H0YrpDFttK1pEJpGMcv1ccO1bde6k2VUs7RL66Zx2cqBir89MLL7-z/exec', options).then(response => response.json());
+            //     // var todayQuestions= response.json();
+            //     console.log(todayQuestions);
+            //     localStorage.setItem('question1', todayQuestions[0]);
+            //     localStorage.setItem('question2', todayQuestions[1]);
+            //     localStorage.setItem('question4', todayQuestions[3]);
+            //     localStorage.setItem('question3', todayQuestions[2]);
+            //     document.getElementById('question1').innerHTML= `Question 1: ${localStorage.getItem('question1')}`;
+            //     document.getElementById('question2').innerHTML= `Question 2: ${localStorage.getItem('question2')}`;
+            //     document.getElementById('question3').innerHTML= `Question 3: ${localStorage.getItem('question3')}`;
+            //     document.getElementById('question4').innerHTML= `Question 4: ${localStorage.getItem('question4')}`;
+            // }
+
+        }
+    </script>
+</body>
+
+</html>
