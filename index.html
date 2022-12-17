@@ -11,28 +11,45 @@
 </head>
 <body onload="func1()">
     <script src="myScript.js"></script>
-    <div id="maincontainer">
-        <div class="nav">
-            <a href="/index.html"><img src="logo.png" alt="logo" class="logo" style="height: 110px; width:113px; padding: 10px;"></a>
-            <span style="font-size:larger; border:2px solid black; padding:10px; box-shadow: 10px 5px 5px black;">Jaldi Question Kar le bhaiii!!!!</span>
-            <a href="performance.html" id="performa"><button>Performance</button></a>
+<!-- <div class="Attached"> -->
+    <div class="nav">
+        <a href="/index.html"><img src="logo.png" alt="logo" class="logo" style="height: 110px; width:113px; padding: 10px;"></a>
+        <!-- <div style="font-size:larger; border:2px solid black; padding:10px; box-shadow: 10px 5px 5px black;" id="date">Jaldi Question Kar le bhaiii!!!!</span> -->
+            <div class="dateXreload">
+            <div id="date" style="border:2px solid black; padding:10px; box-shadow: 10px 5px 5px black;margin-right: 1.5vw; margin-left: 5vw;"></div>
+            <button id="reload" onclick="reloadIt()" style="background-color: white; border: none;"><img src="reload.png" id= "reloadimg" style="height:50px; width:50px";></button>
         </div>
-    <div class="dateXreload">
-        <div id="date"></div>
-        <button id="reload" onclick="reloadIt()" style="background-color: white; border: none;"><img src="reload.png" id= "reloadimg" style="height:30px; width:30px";></button>
-
+        <a href="performance.html" id="performa"><button>Performance</button></a>
     </div>
-    <!-- <p id="wait"></p> -->
-    <div class="container">
-        <div id="question1" class="vals"></div>
-        <div id="question2" class="vals"></div>
-        <div id="question3" class="vals"></div>
-        <div id="question4" class="vals"></div>
-        <div id="queryFailed"></div>
-        <button class="check" onclick="checkQuestionStatus()"></button>
-        <!-- <button onclick="func1()">Button</button> -->
+<!-- </div> -->
+<div class="superMain">
+    <div class="maincontainer">
+        <!-- <p id="wait"></p> -->
+        <div class="head">LEETCODE</div>
+        <div class="container">
+            <div id="question1" class="vals"></div>
+            <div id="question2" class="vals"></div>
+            <div id="question3" class="vals"></div>
+            <div id="question4" class="vals"></div>
+            <div class="queryFailed"></div>
+            <button class="check" onclick="checkQuestionStatus()"></button>
+            <!-- <button onclick="func1()">Button</button> -->
+        </div>
     </div>
+    <div class="maincontainer">
+        <div class="head">CODEFORCES</div>
+        <div class="container">
+            <div id="codeForcequestion1" class="vals"></div>
+            <div id="codeForcequestion2" class="vals"></div>
+            <div id="codeForcequestion3" class="vals"></div>
+            <div id="codeForcequestion4" class="vals"></div>
+            <div class="codeForcequeryFailed"></div>
+            <button class="check" onclick="checkQuestionStatus()"></button>
+            <!-- <button onclick="func1()">Button</button> -->
+        </div>
+    </div>  
 </div>
+
 </body>
 
 </html>
