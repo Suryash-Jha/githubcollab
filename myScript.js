@@ -1,3 +1,22 @@
+var cfdiffiXcolor={
+    "800-900": "rgb(31 107 3)",
+    "0900-1100": "rgb(31 107 3)",
+    "1200-1300": "rgb(207 103 4)",
+    "1400-1500": "rgb(205 6 6)",
+    "1600-1800": "rgb(205 6 6)",
+    "1900-2000": "rgb(205 6 6)",
+    "2100-2200": "rgb(205 6 6)",
+    "2300-2600": "rgb(205 6 6)",
+    "2700-3800": "rgb(205 6 6)"
+}
+        function getColorCf(t){
+            for (var key in cfdiffiXcolor) {
+                var range = key.split("-");
+                // console.log(range);
+                if (t >= range[0] && t <= range[1])
+                    return cfdiffiXcolor[key];
+            }
+        }
 
         function getCurrDate(){
             const date = new Date();
@@ -46,16 +65,11 @@
             .catch(err => console.error(err)); 
         }
         function func1() {
+            
             var diffiXcolor={
                 EASY: "rgb(31 107 3)",
                 MEDIUM: "rgb(207 103 4)",
                 HARD: "rgb(205 6 6)"
-
-            }
-            var cfdiffiXcolor={
-                800: "rgb(31 107 3)",
-                1200: "rgb(207 103 4)",
-                1600: "rgb(205 6 6)"
 
             }
             var todayQuestions= {};
@@ -69,9 +83,6 @@
                         var link= localStorage.getItem(`question${i+1}`);
                         var content= extractTextFromSlug(link);
                         var Difficulty= localStorage.getItem(`diffi${i+1}`);
-                        // console.log(Difficulty);
-                        // console.log(Difficulty['EASY']);
-
                         const a= document.createElement('a');
                         a.href= link;
                         a.target= "_blank";
@@ -108,7 +119,9 @@
                         but.innerHTML= `Question ${i+1}`;
                         but.style.border= "2px solid black";
                         but.style.borderRadius= "25px";
-                        but.style.backgroundColor= diffiXcolor['EASY'];
+                        but.style.backgroundColor= getColorCf(Difficulty);
+                        // console.log(Difficulty);
+                        // console.log(getColorCf(Difficulty));
                         // console.log(diffiXcolor[Difficulty]);
                         but.style.fontSize= "20px";
                         but.style.color= "white";
@@ -175,7 +188,10 @@
                     but.className= "but";
                     but.style.border= "2px solid black";
                     but.style.borderRadius= "25px";
-                    but.style.backgroundColor= diffiXcolor['EASY'];
+                    but.style.backgroundColor= getColorCf(Difficulty);
+                    // console.log(Difficulty);
+
+                    // console.log(getColorCf(Difficulty));
                     // console.log(diffiXcolor[Difficulty]);
                     but.style.fontSize= "20px";
                     but.style.color= "white";
