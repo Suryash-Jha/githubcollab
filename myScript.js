@@ -18,6 +18,11 @@ var cfdiffiXcolor={
                     return cfdiffiXcolor[key];
             }
         }
+        function extractTextFromSlugCF(link){
+            var question= link.split("/");
+            // console.log(question);
+            return (question[5]+ question[6]);
+        }
 
         function getCurrDate(){
             const date = new Date();
@@ -52,8 +57,13 @@ var cfdiffiXcolor={
                 }
                 else{
                     for(let i=0; i<4; i++){
+
+                               // LEETCODE
+
                                 localStorage.setItem(`question${i+1}`, todayQuestions[`Question ${i+1}`]);
                                 localStorage.setItem(`diffi${i+1}`, todayQuestions[`Difficulty ${i+1}`]);
+
+                                // CODEFORCES
                                 localStorage.setItem(`cfquestion${i+1}`, todayCodeforcesQuestions[`Question ${i+1}`]);
                                 localStorage.setItem(`cfdiffi${i+1}`, todayCodeforcesQuestions[`Difficulty ${i+1}`]);
                                 
@@ -80,6 +90,10 @@ var cfdiffiXcolor={
             var Todate= localStorage.getItem("date");
             if(Todate== currDate){
                 document.querySelector("#date").innerHTML= `${Todate}`;
+
+                // LEETCODE
+
+
                 for(let i=0; i<4; i++){
                         var link= localStorage.getItem(`question${i+1}`);
                         var content= extractTextFromSlug(link);
@@ -104,6 +118,9 @@ var cfdiffiXcolor={
                         document.querySelector(`#question${i+1}`).appendChild(a);
                     }
 
+                    // CODEFORCES
+
+
                     for(let i=0; i<4; i++){
                         var link= localStorage.getItem(`cfquestion${i+1}`);
                         var Difficulty= localStorage.getItem(`cfdiffi${i+1}`);
@@ -117,7 +134,7 @@ var cfdiffiXcolor={
 
                         const but= document.createElement('button');
                         but.className= "but";
-                        but.innerHTML= `Question ${i+1}`;
+                        but.innerHTML= extractTextFromSlugCF(link);
                         but.style.border= "2px solid black";
                         but.style.borderRadius= "25px";
                         but.style.backgroundColor= getColorCf(Difficulty);
@@ -149,6 +166,8 @@ var cfdiffiXcolor={
                 }
                 else{
                     
+                    // LEETCODE
+
                     for(let i=0; i<4; i++){
                                 localStorage.setItem(`question${i+1}`, todayQuestions[`Question ${i+1}`]);
                                 localStorage.setItem(`diffi${i+1}`, todayQuestions[`Difficulty ${i+1}`]);
@@ -174,6 +193,10 @@ var cfdiffiXcolor={
                                 document.querySelector(`#question${i+1}`).appendChild(a);
                                 // document.querySelector(`#question${i+1}`).innerHTML= localStorage.getItem(`question${i+1}`);
                 }
+
+                // CODEFORCES
+
+
                 for(let i=0; i<4; i++){
                     localStorage.setItem(`cfquestion${i+1}`, todayCodeforcesQuestions[`Question ${i+1}`]);
                     localStorage.setItem(`cfdiffi${i+1}`, todayCodeforcesQuestions[`Difficulty ${i+1}`]);
@@ -185,7 +208,7 @@ var cfdiffiXcolor={
                     a.target= "_blank";
                     // a.innerHTML= `Question ${i+1}`;
                     const but= document.createElement('button');
-                    but.innerHTML= `Question ${i+1}`;
+                    but.innerHTML= extractTextFromSlugCF(link);
                     but.className= "but";
                     but.style.border= "2px solid black";
                     but.style.borderRadius= "25px";
