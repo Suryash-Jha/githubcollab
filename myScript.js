@@ -79,7 +79,7 @@
 
                         const but= document.createElement('button');
                         but.className= "but";
-                        but.innerHTML= `Question ${i+1}`;
+                        but.innerHTML= content;
                         but.style.border= "2px solid black";
                         but.style.borderRadius= "25px";
                         but.style.backgroundColor= diffiXcolor[Difficulty];
@@ -146,7 +146,7 @@
                                 a.target= "_blank";
                                 // a.innerHTML= content;
                                 const but= document.createElement('button');
-                                but.innerHTML= `Question ${i+1}`;;
+                                but.innerHTML= content;
                                 but.className= "but";
                                 but.style.border= "2px solid black";
                                 but.style.borderRadius= "25px";
