@@ -134,7 +134,7 @@ var cfdiffiXcolor={
 
                         const but= document.createElement('button');
                         but.className= "but";
-                        but.innerHTML= extractTextFromSlugCF(link);
+                        but.innerHTML= extractTextFromSlugCF(link)+ " - "+ Difficulty;
                         but.style.border= "2px solid black";
                         but.style.borderRadius= "25px";
                         but.style.backgroundColor= getColorCf(Difficulty);
@@ -208,7 +208,7 @@ var cfdiffiXcolor={
                     a.target= "_blank";
                     // a.innerHTML= `Question ${i+1}`;
                     const but= document.createElement('button');
-                    but.innerHTML= extractTextFromSlugCF(link);
+                    but.innerHTML= extractTextFromSlugCF(link)+ " - " + Difficulty;
                     but.className= "but";
                     but.style.border= "2px solid black";
                     but.style.borderRadius= "25px";
