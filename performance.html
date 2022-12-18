@@ -16,21 +16,24 @@
     .container{
         padding-bottom: 5rem;
     }
-    .loader {
+
+    /* Loader */
+
+    /* .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 16px solid blue;
-  border-bottom: 16px solid blue;
+  /* border-top: 16px solid blue;
+  border-bottom: 16px solid blue; */
 
-  width: 90px;
-  height: 90px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+  /* width: 90px; */
+  /* height: 90px; */
+  /* -webkit-animation: spin 2s linear infinite; /* Safari */
+  /* animation: spin 2s linear infinite; */ */
   
-}
+/* } */ */
 
 /* Safari */
-@-webkit-keyframes spin {
+/* @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
 }
@@ -38,7 +41,7 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
+} */
     .maincontainer {
         display: flex;
         flex-direction: row;
@@ -115,6 +118,23 @@
         margin: auto;
 
     }
+    #last{
+        border: 2px solid red;
+        position:absolute;
+        height: 4vh;
+        width: 13vw;
+        bottom:10px;
+        right: 10px;
+        /* font-size: larger; */
+    }
+    #countApi{
+        border: 2px solid red;
+        position:absolute;
+        height: 4vh;
+        width: 13vw;
+        top:10px;
+        right: 10px;
+    }
     .question {
         height: 15%;
         width: 60%;
@@ -154,8 +174,10 @@
                 document.getElementById('people').appendChild(opt);
 
             }
+
         }
         loadJson();
+        // loadTimeCount();
     </script>
 
     <a href="/index.html">HOME</a>
@@ -164,7 +186,11 @@
         <select name="people" id="people" style="height:100%; font-size: medium;">
         </select>
         <button type="submit" onclick="fetchData()">Submit</button>
-        <p id="wait" ></p>
+        <div class="waiting" style="display: flex;">
+            <p id="wait" ></p>
+            <!-- <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> -->
+        </div>
+
     </div>
     
         <div id="data" >
@@ -176,9 +202,28 @@
         </div>
 
     </div>
-
-
+    <div id="last">
+hye
+    </div>
+    <div id="countApi">
+ye
+    </div>
     <script>
+        function loadTimeCount() {
+            const lastTime= localStorage.getItem('lastTime');
+            const countAPI= localStorage.getItem('countAPI');
+            if(lastTime== null || countAPI== null){
+                localStorage.setItem('lastTime', 5);
+                localStorage.setItem('countAPI', 0);
+            }
+            else{
+                document.getElementById('last').innerHTML= lastTime;
+                console.log("value founded");
+                document.getElementById('countApi').innerHTML= countAPI;
+            }
+            // console.log(localStorage.getItem('countAPI'));
+        }
+
         function getCurrDate() {
             const date = new Date();
             var day = date.getDate();
@@ -287,8 +332,8 @@
             //     document.getElementById('question3').innerHTML= `Question 3: ${localStorage.getItem('question3')}`;
             //     document.getElementById('question4').innerHTML= `Question 4: ${localStorage.getItem('question4')}`;
             // }
-
         }
+        loadTimeCount();
     </script>
 </body>
 
