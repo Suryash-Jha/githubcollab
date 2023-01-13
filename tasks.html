@@ -163,6 +163,10 @@
             let taskName = document.getElementById("TaskName").value;
             let taskUrl = document.getElementById("TaskUrl").value;
             let taskDate = getDate();
+            if(localStorage.getItem("token") != "cfeestsrathore"){
+                alert("You can't add tasks");
+                return;
+            }
             const node= document.createElement("div");
                     node.className= "TaskDiv";
                     const Namenode= document.createElement("span");
