@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            height: 100vh;
+            width: 100vw;
+            background-color: #000;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .column{
+            height: 80vh;
+            width: 20vw;
+            /* background-color: #fff; */
+            border: 2px solid black;
+            border-radius: 10px;
+            margin: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main{
+            height: 50vh;
+            width: 18vw;
+            /* background-color: white; */
+            border: 2px solid black;
+            border-radius: 10px;
+            margin: 2px;
+        }
+        /* .innercol1 .innercol2 .innercol3{
+            display: none;
+            height: 2vh;
+            /* height: 30vh;
+            width: 15vw;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+            margin: 10px; */
+        /* } */ 
+        .hidden{
+            display: none;
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="column" id="column1">
+            <!-- <div class="main">  -->
+                <img src="reload.png" class="main"></img>
+            <!-- </div> -->
+                <div class="hidden">
+                    <img src="fav.ico" class="innercol1"></img>
+                    <img src="fav.ico" class="innercol1"></img>
+                    <img src="fav.ico" class="innercol1"></img>
+
+                </div>
+        </div>
+        <div class="column" id="column2">
+            <img src="reload.png" class="main"></img>
+            <div class="hidden">
+
+            <img src="fav.ico" class="innercol2"></img>
+            <img src="fav.ico" class="innercol2"></img>
+            <img src="fav.ico" class="innercol2"></img>
+            </div>
+        </div>
+        <div class="column" id="column3">
+            <img src="reload.png" class="main"></img>
+            <div class="hidden">
+
+            <img src="fav.ico" class="innercol3"></img>
+            <img src="fav.ico" class="innercol3"></img>
+            <img src="fav.ico" class="innercol3"></img>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var column1 = document.getElementById("column1");
+        var column2 = document.getElementById("column2");
+        var column3 = document.getElementById("column3");
+
+        column1.addEventListener("click", function(){
+            // console.log("YES");
+            document.getElementsByClassName("hidden")[0].style.display = "block";
+            var innercol1 = document.getElementsByClassName("innercol1");
+            for(var i=0; i<innercol1.length; i++){
+                innercol1[i].style.display = "block";
+                innercol1[i].style.height = "18vh";
+                innercol1[i].style.width = "18vw";
+                // innercol1[i].style.backgroundColor  = "white";
+                innercol1[i].style.margin = "10px";
+
+
+            }
+        });
+
+        column2.addEventListener("click", function(){
+            document.getElementsByClassName("hidden")[1].style.display = "block";
+            var innercol2 = document.getElementsByClassName("innercol2");
+            for(var i=0; i<innercol2.length; i++){
+                innercol2[i].style.display = "block";
+                innercol2[i].style.height = "18vh";
+                innercol2[i].style.width = "18vw";
+                // innercol2[i].style.backgroundColor  = "red";
+                innercol2[i].style.margin = "10px";
+            }
+        });
+
+        column3.addEventListener("click", function(){
+            document.getElementsByClassName("hidden")[2].style.display = "block";
+            var innercol3 = document.getElementsByClassName("innercol3");
+            for(var i=0; i<innercol3.length; i++){
+                innercol3[i].style.display = "block";
+                innercol3[i].style.height = "18vh";
+                innercol3[i].style.width = "18vw";
+                // innercol3[i].style.backgroundColor  = "red";
+                innercol3[i].style.margin = "10px";
+            }
+        });
+
+
+
+    </script>
+
+</body>
+</html>

@@ -225,7 +225,7 @@
 //         }
 // get3000();
         
-        setInterval(function get3000(){
+        function get3000(){
             console.log("check");
             var sendName= localStorage.getItem('sendName');
             const url="https://script.google.com/macros/s/AKfycbxWrD_-Oqmkslzc3jkOmt7jB7r9f9xIPXPjqtAbPZtFqTXfGzTuC-lVCDROiAvHf1-2/exec";
@@ -263,7 +263,8 @@
             .catch((error) => {
                 console.error('Error:', error);
             });
-        }, 2000);
+        }
+        get3000();
       </script>  
 </body>
 </html>
