@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- curl https://api.openai.com/v1/images/generations \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer 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" \
+  -d '{
+    "prompt": "mahatma gandhi with lotus on elephant",
+    "n": 1,
+    "size": "256x256",
+    "response_format": "b64_json"
+  }' -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>suryash</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: rgb(54, 45, 45);
+        }
+        .container{
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+    
+        }
+        textarea{
+            
+            padding: 2vh;
+            font-size: 6vh;
+            width: 40vw;
+            border: 2px solid black;
+            border-radius: 10px;
+            height: 10vh;
+            background-color: rgb(172, 171, 168);
+        }
+    
+        #btn{
+            display: hidden;
+        }
+        .row{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+              word-break: break-all;
+                overflow-wrap: break-word;
+
+
+        }
+        #ans{
+            background-color: #e1e4c7;
+            font-size: 5 vh;
+            color: black;
+            /* padding: 2vh; */
+            /* border: 2px solid black; */
+            border-radius: 8px;
+            max-width: 80%;
+            height: auto;
+            white-space: pre-wrap;
+            overflow-y: scroll;
+        }
+        
+        div::-webkit-scrollbar {
+            width: 0px;
+            height: 0px;
+        }
+        .show{
+            border :2px solid black;
+              line-break: normal;  
+              overflow-wrap: break-word;
+
+
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <textarea name="" id="prompt" placeholder="Enter your query..."></textarea>
+            <!-- <button id="btn" onclick="getResp()">Submit!</button> -->
+        </div>
+        <h1 id="ans"></h1>
+    </div>
+    <script>
+        document.getElementById("prompt").addEventListener('keydown', function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                getResp();
+            }
+        });
+        function getResp(){
+            var question= document.getElementById('prompt').value;
+            fetch('https://api.openai.com/v1/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer <Your API Key>'
+                },
+                // body: '{"model": "text-davinci-003", "prompt": " code ofLongest common subsequence solution", "temperature": 0.5, "max_tokens": 4000}',
+                body: JSON.stringify({
+                    'model': 'text-davinci-003',
+                    'prompt': question,
+                    'temperature': 0.5,
+                    'max_tokens': 4000
+                })
+            }).then(response => response.json())
+            .then(response => {
+                document.getElementById('ans').classList.add('show');
+                document.getElementById('ans').innerHTML = response.choices[0].text;
+            });
+        }
+    </script>
+</body>
+</html>
