@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Important Link</title>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha256.js"></script>
     <style>
         *{
             margin: 0;
@@ -85,7 +86,7 @@
             width: 96%;
             height: 10%;
             /* border: 2px solid black; */
-            margin: 2vh;
+            margin: 2%;
             border-radius: 1px;
             /* background-color: brown; */
             display: flex;
@@ -101,7 +102,7 @@
             fetch('https://aquamediumorchidvoxels.suryashjha.repl.co/tasks')
             .then(response => response.json())
             .then(data => {
-                // console.log(data.length);
+                // console.log(data);
                 for(var i in data){
                     var LinkName= data[i]["task"];
                     var LinkUrl= data[i]["link"];
@@ -122,13 +123,7 @@
                     node.appendChild(Datenode);
 
                     document.querySelector(".TaskList").appendChild(node);
-                    // console.log(data[i]["date-added"]);
                 }
-                // const node= document.createElement("div");
-                // node.className= "TaskDiv";
-                // node.innerHTML= data["0"]["task"];
-                // document.querySelector(".TaskList").appendChild(node);
-                // console.log(data["0"]["date-added"]);
             })
             .catch(error => console.error(error))
         }
@@ -140,6 +135,7 @@
                 <span class="formSpan">Link:</span> <input type="text" name="TaskUrl" id="TaskUrl">
                 <input type="submit" value="Add Task" id="SubmitButton" onclick="postTask()">
         </div>
+        <p id="temp"></p>
         <div style="display: flex; justify-content: space-around;">
             <h1>Task Name</h1>
             <h1>Task Url</h1>
@@ -158,15 +154,22 @@
             var year = date.getFullYear();
             return day + "-" + month + "-" + year;
         }
-
         function postTask(){
             let taskName = document.getElementById("TaskName").value;
             let taskUrl = document.getElementById("TaskUrl").value;
             let taskDate = getDate();
-            if(localStorage.getItem("token") != "cfeestsrathore"){
+            var token= localStorage.getItem("token");
+            var encyr= CryptoJS.SHA256(token);
+            if(taskName.length == 0 || taskUrl.length == 0){
+                alert("Please fill all the fields");
+                return;
+            }
+            if(encyr != "794945d35152dad7d0d547f1579fbe6087da3b53c1676c68735711cce30f201c"){
                 alert("You can't add tasks");
                 return;
             }
+
+            // document.querySelector("#temp").innerHTML= encyr;
             const node= document.createElement("div");
                     node.className= "TaskDiv";
                     const Namenode= document.createElement("span");
