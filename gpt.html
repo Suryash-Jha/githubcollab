@@ -98,11 +98,12 @@
         });
         function getResp(){
             var question= document.getElementById('prompt').value;
+            // var apiKey= localStorage.getItem('apiKey');
             fetch('https://api.openai.com/v1/completions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer <Your API Key>'
+                    'Authorization': 'Bearer <your api key>'
                 },
                 // body: '{"model": "text-davinci-003", "prompt": " code ofLongest common subsequence solution", "temperature": 0.5, "max_tokens": 4000}',
                 body: JSON.stringify({
@@ -119,4 +120,6 @@
         }
     </script>
 </body>
+<!-- ApiKeyStartsHere xyzsk-DOXRUPcmPCR7g4uV36IJT3BlbkFJlVydOVM6gKXY6Zk4TYlkzyx andEndsHere-->
+
 </html>
